@@ -5,7 +5,7 @@ Given the current limitation of single-cell simulation packages which often are 
 
 The SCORPIO package helps benchmark the performance of [CellPhenoX](https://github.com/fanzhanglab/pyCellPhenoX).
 
- This code was initially developed by Dr. Jun Inamo.
+This code was initially developed by [Dr. Jun Inamo](https://github.com/juninamo/S2EQTL).
 
 ## Usage
 Run the `simulation_benchmark.sh` script to automize the generation of the datasets.
