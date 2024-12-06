@@ -10,13 +10,21 @@ if (length(args) == 0) {
 num_samples <- as.numeric(args[1])
 fold_change <- as.numeric(args[2])
 
-source("./functions-3.R")
+source("./simulation_functions.R")
 
 n_thread=4
 registerDoParallel(cores = n_thread)
+current_dir <- getwd()
+results_path <- file.path(current_dir, "results")
+data_path <- file.path(current_dir, "data")
+# Create the folders if they don't exist
+if (!dir.exists(results_dir)) {
+  dir.create(results_dir)
+}
+if (!dir.exists(data_dir)) {
+  dir.create(data_dir)
+}
 
-results_path = "/Users/zhanglab_mac2/Library/CloudStorage/OneDrive-TheUniversityofColoradoDenver/Zhang_Lab/Research/shap/xcell/xcell_tutorial/simulation_benchmarking_results/"
-data_path = "/Users/zhanglab_mac2/Library/CloudStorage/OneDrive-TheUniversityofColoradoDenver/Zhang_Lab/Research/shap/xcell/xcell_tutorial/simulation_benchmarking_data/"
 # parameters for generating dummy dataset
 n_cells=100 # cells per individual #PER CELLTYPE
 sd_celltypes=0.1  # standard deviation of number of cells 
@@ -122,7 +130,7 @@ pseudo_feature_matrix <- generate_pseudo_features(dummy_data,
                                                   batch_features = batch_features,
                                                   individual_features = individual_features,
                                                   
-                                                  # 各属性の割合の最大値を定義
+                                                  # Define the maximum percentage of each attribute
                                                   cluster_ratio = cluster_ratio,
                                                   disease_ratio = disease_ratio,
                                                   sex_ratio = sex_ratio,
