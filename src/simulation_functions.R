@@ -967,13 +967,13 @@ create_NAM = function(metadata,
   maxnsteps=15L
   
   ## japanese: https://qiita.com/khigashi02/items/b4b95714cae9e3f2a7be
-  ### Diffusion map: データ点間の距離から遷移確率行列を構成して、diffusion process（データのグラフ構造上のランダムウォーク）を作用させる。
-  ## tステップ後の分布は遷移確率行列のt乗で得られる。その分布の違いをユークリッド距離として反映するような低次元座標を得たいのだけど、それが遷移確率行列のt乗の固有ベクトルとして得られる、という手法。
-  ## ノイズに強い、ステップ数tによって局所的な特徴から大域的構造まで対応できる、「軌道」のような構造を見つけやすい、など色んな利点があるけど、異なる軌道を異なる次元に圧縮しがち。つまり二次元、三次元などの低次元での可視化には向かない。
-  ## ランダムウォークによって隣接行列からノードの集合を得る（https://qiita.com/kk31108424/items/e05b32c1161f1e309328）
+  ### Diffusion map: Construct a transition probability matrix from the distances between data points and apply a diffusion process (random walk on the data graph structure).
+  ## The distribution after t steps is obtained by raising the transition probability matrix to the t power. I would like to obtain low-dimensional coordinates that reflect the difference in the distribution as a Euclidean distance, and this method can be obtained as an eigenvector of the t-th power of the transition probability matrix.
+  ## It has many advantages, such as being resistant to noise, being able to handle everything from local features to global structures depending on the number of steps t, and being able to easily find structures like ``trajectories'', but it tends to compress different trajectories into different dimensions. In other words, it is not suitable for visualization in low dimensions such as 2D or 3D.
+  ## Obtain a set of nodes from an adjacency matrix by random walk（https://qiita.com/kk31108424/items/e05b32c1161f1e309328）
   ## NOTE: this function ignores distances and only uses unweighted connectivities
-  ## このコードは、グラフ上の情報を拡散（または拡散）させるための関数を定義しています。この種の拡散ステップは、しばしばネットワークデータのクラスタリングや次元削減などのタスクで使用されます。
-  ## 具体的には以下のような処理を行っています：
+  ## This code defines a function to spread (or diffuse) information on the graph. This type of diffusion step is often used in tasks such as clustering and dimensionality reduction of network data.
+  ## Specifically, we perform the following processing:：
   diffuse_step <- function(data, s) {
     a <- data$connectivities  ## 1. `data$connectivities`から接続行列`a`を取得します。この行列はグラフの接続性を表し、行と列はグラフの頂点（ここでは細胞）を表し、値はその頂点間の接続強度（または重み）を表します。
     degrees <- Matrix::colSums(a) + 1 # degrees = number of edges joined to each graph vertex (=each cell)  ## 2. それぞれの頂点の次数（つまり、その頂点に接続されたエッジの数）を計算します。次数はグラフ上での頂点の「重要度」を示す一つの指標です。ここでは`Matrix::colSums(a)`を使用して各頂点の次数を計算し、1を加えています。
