@@ -69,6 +69,6 @@ $ bash simulation_benchmark.sh
 
 ## Contact
 
-For questions or suggestions regarding the SCORPIO simulation framework and code, please contact **Jun Inamo** at _[jun.inamo@cuanschutz.edu]_ or **Jade Young** at _[jade.young@cuanschutz.edu]_
+For questions or suggestions regarding the SCORPIO simulation framework and code, please contact **Jun Inamo** _[jun.inamo@cuanschutz.edu]_ or **Jade Young** _[jade.young@cuanschutz.edu]_
 
 For questions regarding the CellPhenoX publication and methodology, please contact [Fan Zhang](https://fanzhanglab.org/).
