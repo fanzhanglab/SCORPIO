@@ -15,31 +15,32 @@ suppressWarnings({
   library(stevedata)
   library(lme4)
   library(broom.mixed)
-
+  
   # With parallelism
   library(doParallel)
   library(foreach)
   library(pbapply)
+  
   library(variancePartition)
-
+  
   library(Seurat)
 })
 
 # Functions
 ## generate meta data
 generate_dummy_metadata <- function(n_cells = 3000, # cells of major cell types per individual
-                                              sd_celltypes = 0.1,  # standard deviation of number of cells 
-                                              n_major_cell_types = 7,
-                                              n_minor_cell_types = 3,
-                                              relative_abundance = 0.1, # ratio between major and rare
-                                              n_major_diff_celltypes = 1,
-                                              n_minor_diff_celltypes = 1,
-                                              n_individuals = 30, # total individuals
-                                              n_batchs = 4,
-                                              prop_sex = 0.5, 
-                                              prop_disease = 0.5,  
-                                              fc_increase = 0.1, # additional FC of specified cell types which are from people with case groups compared to control groups (e.g., if you specify 0.5, FC comparing increased cell type between case and control groups will be 1.5 in total)
-                                              seed = 1234
+                                    sd_celltypes = 0.1,  # standard deviation of number of cells 
+                                    n_major_cell_types = 7,
+                                    n_minor_cell_types = 3,
+                                    relative_abundance = 0.1, # ratio between major and rare
+                                    n_major_diff_celltypes = 1,
+                                    n_minor_diff_celltypes = 1,
+                                    n_individuals = 30, # total individuals
+                                    n_batchs = 4,
+                                    prop_sex = 0.5, 
+                                    prop_disease = 0.5,  
+                                    fc_increase = 0.1, # additional FC of specified cell types which are from people with case groups compared to control groups (e.g., if you specify 0.5, FC comparing increased cell type between case and control groups will be 1.5 in total)
+                                    seed = 1234
 ) {
   n_cell_types = n_major_cell_types + n_minor_cell_types
   
@@ -142,6 +143,7 @@ generate_dummy_metadata <- function(n_cells = 3000, # cells of major cell types 
   dummy_data <- dummy_data[sample(nrow(dummy_data)), ]
   return(list(dummy_data,diff_cell_types))
 }
+
 generate_dummy_data_woInteraction <- function(n_cells = 3000, # cells of major cell types per individual
                                               sd_celltypes = 0.1,  # standard deviation of number of cells 
                                               n_major_cell_types = 7,
@@ -198,7 +200,7 @@ generate_dummy_data_woInteraction <- function(n_cells = 3000, # cells of major c
   
   celltype_df <- data.frame(matrix(ncol = 2, nrow = 0))
   colnames(celltype_df) <- c("cell_type", "subject_id")
-
+  
   # Generate baseline of cell type data.frame 
   for (id in dummy_data$subject_id){
     set.seed(seed*5*grep(id,dummy_data$subject_id)*10)
@@ -231,12 +233,12 @@ generate_dummy_data_woInteraction <- function(n_cells = 3000, # cells of major c
   
   for (i in LETTERS[1:n_cell_types]) {
     abundance = dplyr::left_join(celltype_df,
-                                   dummy_data,
-                                   by="subject_id") %>%
-        dplyr::filter(cell_type == i) %>%
-        dplyr::group_by(subject_id) %>%
-        dplyr::summarise(pro = dplyr::n()/n_cells,
-                         count = dplyr::n())
+                                 dummy_data,
+                                 by="subject_id") %>%
+      dplyr::filter(cell_type == i) %>%
+      dplyr::group_by(subject_id) %>%
+      dplyr::summarise(pro = dplyr::n()/n_cells,
+                       count = dplyr::n())
     if(i %in% diff_cell_types){
       
       # abundance = dplyr::left_join(celltype_df,
@@ -246,7 +248,7 @@ generate_dummy_data_woInteraction <- function(n_cells = 3000, # cells of major c
       #   dplyr::group_by(subject_id) %>%
       #   dplyr::summarise(pro = dplyr::n()/n_cells,
       #                    count = dplyr::n())
-
+      
       # prop(ortion) = cells for each subject that are this cell type
       print(head(abundance))
       # diff is the number of cells that the differential cell types should have (use fc_interact to scale/increase)
@@ -264,7 +266,7 @@ generate_dummy_data_woInteraction <- function(n_cells = 3000, # cells of major c
       celltype_df = rbind(
         data.frame(cell_type = rep(i, len),
                    subject_id = rep(unique(dummy_data[dummy_data$disease == "1",]$subject_id),diff)),
-                   celltype_df
+        celltype_df
       )
     }
     else{
@@ -278,7 +280,7 @@ generate_dummy_data_woInteraction <- function(n_cells = 3000, # cells of major c
       celltype_df = rbind(
         data.frame(cell_type = rep(i, len),
                    subject_id = rep(unique(dummy_data[dummy_data$disease == "0",]$subject_id),diff_control)),
-                   celltype_df
+        celltype_df
       )
       
     }
@@ -290,6 +292,7 @@ generate_dummy_data_woInteraction <- function(n_cells = 3000, # cells of major c
   dummy_data <- dummy_data[sample(nrow(dummy_data)), ]
   return(list(dummy_data,diff_cell_types))
 }
+
 generate_pseudo_pcs_woInteraction = function(data, 
                                              # number of principal components
                                              n_pcs = 20, 
@@ -421,7 +424,7 @@ generate_pseudo_features = function(data,
                                     bmi_features = 0,
                                     batch_features = 0,
                                     individual_features = 0,
-                                   
+                                    
                                     cluster_ratio = 0.25,
                                     disease_ratio = 0,
                                     sex_ratio = 0,
