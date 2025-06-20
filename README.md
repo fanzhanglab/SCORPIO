@@ -25,7 +25,7 @@ The core of our simulation is the generation of a realistic single-cell feature 
 
 The value of each feature for each cell is modeled as a weighted linear combination of multiple underlying signals plus random noise:
 
-$$ \text{Feature}_j = \sum_{i=1}^{k} w_{i,j} \cdot \text{Signal}_i + w_{\text{noise},j} \cdot \text{Noise} $$
+$$\text{Feature}_j = \sum_{i=1}^{k} w_{i,j} \cdot \text{Signal}_i + w_{\text{noise},j} \cdot \text{Noise}$$
 
 where for a given feature $j$:
 
