@@ -424,14 +424,14 @@ w_{i,j} \cdot \text{Signal}_i + w_{\text{noise},j} \cdot \text{Noise}
 \]</span></p>
 <p>where for a given feature <span class="math inline">\(j\)</span>:</p>
 <ul>
-<li><span class="math inline">\(\\text{Signal}\_i\)</span> is a vector
-of values across all cells representing a specific source of variation
+<li><span class="math inline">\(\text{Signal}_i\)</span> is a vector of
+values across all cells representing a specific source of variation
 (e.g., cell type, disease status, sex, age, batch).</li>
-<li><span class="math inline">\(w\_{i,j}\)</span> is the weight or
+<li><span class="math inline">\(w_{i,j}\)</span> is the weight or
 ‘ratio’ for that signal, controlling the proportion of variance in
 Feature <span class="math inline">\(j\)</span> attributable to Factor
 <span class="math inline">\(i\)</span>.</li>
-<li><span class="math inline">\(\\text{Noise}\)</span> is a vector of
+<li><span class="math inline">\(\text{Noise}\)</span> is a vector of
 random Gaussian noise.</li>
 </ul>
 <p>The generation of each feature involves these steps:</p>

@@ -25,13 +25,13 @@ The core of our simulation is the generation of a realistic single-cell feature 
 
 The value of each feature for each cell is modeled as a weighted linear combination of multiple underlying signals plus random noise:
 
-$$\text{Feature}_j = \sum_{i=1}^{k} w_{i,j} \cdot \text{Signal}_i + w_{\text{noise},j} \cdot \text{Noise}$$
+$$ \text{Feature}_j = \sum_{i=1}^{k} w_{i,j} \cdot \text{Signal}_i + w_{\text{noise},j} \cdot \text{Noise} $$
 
 where for a given feature $j$:
 
-  * $\\text{Signal}\_i$ is a vector of values across all cells representing a specific source of variation (e.g., cell type, disease status, sex, age, batch).
-  * $w\_{i,j}$ is the weight or 'ratio' for that signal, controlling the proportion of variance in Feature $j$ attributable to Factor $i$.
-  * $\\text{Noise}$ is a vector of random Gaussian noise.
+  * $\text{Signal}_i$ is a vector of values across all cells representing a specific source of variation (e.g., cell type, disease status, sex, age, batch).
+  * $w_{i,j}$ is the weight or 'ratio' for that signal, controlling the proportion of variance in Feature $j$ attributable to Factor $i$.
+  * $\text{Noise}$ is a vector of random Gaussian noise.
 
 The generation of each feature involves these steps:
 
