@@ -366,8 +366,7 @@ age and sex when necessary—specifically tailored to evaluate CellPhenoX.
 This approach is able to create simulated single-cell cell count data,
 followed by varying levels of differential cluster abundance.</p>
 <p>The SCORPIO package helps benchmark the performance of <a href="https://github.com/fanzhanglab/pyCellPhenoX">CellPhenoX</a>.</p>
-<p>This code was developed by <a href="https://github.com/juninamo">Dr. Jun Inamo</a> and modified by
-Jade Young.</p>
+<p>This code was developed by <a href="https://github.com/juninamo">Dr. Jun Inamo</a> and Jade Young.</p>
 </div>
 <div id="simulation-framework-details" class="section level2">
 <h2>Simulation Framework Details</h2>
@@ -447,8 +446,8 @@ cells in Cluster B. This ensures the signal is highly specific to the
 factor it represents.</li>
 <li><strong>Weighted Combination:</strong> Each pure signal, as well as
 a pure noise signal, is scaled to have a mean of 0 and a standard
-deviation of 1 (<code>scale()</code>). They are then combined using the
-user-defined ratio parameters (e.g., <code>cluster_ratio</code>,
+deviation of 1. They are then combined using the user-defined ratio
+parameters (e.g., <code>cluster_ratio</code>,
 <code>disease_ratio</code>, <code>batch_ratio</code>). These ratios
 dictate the contribution of each factor to the final feature’s variance.
 For example, setting <code>disease_ratio = 0.4</code> for a feature
@@ -506,6 +505,14 @@ label.</li>
 generation of the datasets. For example,</p>
 <pre class="bash"><code>$ cd src
 $ bash simulation_benchmark.sh</code></pre>
+</div>
+<div id="contact" class="section level2">
+<h2>Contact</h2>
+<p>For questions or suggestions regarding the SCORPIO simulation
+framework and code, please contact <strong>Jun Inamo</strong> <em>[<a href="mailto:jun.inamo@cuanschutz.edu" class="email">jun.inamo@cuanschutz.edu</a>]</em> or <strong>Jade
+Young</strong> <em>[<a href="mailto:jade.young@cuanschutz.edu" class="email">jade.young@cuanschutz.edu</a>]</em></p>
+<p>For questions regarding the CellPhenoX publication and methodology,
+please contact <a href="https://fanzhanglab.org/">Fan Zhang</a>.</p>
 </div>
 </div>
 
