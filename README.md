@@ -5,7 +5,7 @@ Given the current limitation of single-cell simulation packages which often are 
 
 The SCORPIO package helps benchmark the performance of [CellPhenoX](https://github.com/fanzhanglab/pyCellPhenoX).
 
-This code was developed by [Jun Inamo](https://github.com/juninamo) and Jade Young.
+This code was developed by [Jun Inamo](https://github.com/juninamo) and [Jade Young](https://github.com/jade-young).
 
 ## Simulation Framework Details
 
